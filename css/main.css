@@ -1,0 +1,45 @@
+/******************************************/
+/*************** STRUCTURE ****************/
+/******************************************/
+
+body {
+    text-align: center;
+}
+
+wrapper {
+}
+
+table {
+    position: relative;
+    margin: 0 auto;
+    border-spacing: 0;
+    border: 1px solid black;
+    table-layout: fixed;
+}
+
+tr {
+}
+
+td {
+    border: none;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+}
+
+
+
+/******************************************/
+/**************** BUTTONS *****************/
+/******************************************/
+
+
+
+
+/******************************************/
+/*************** USER-INPUT ***************/
+/******************************************/
+
+.colored {
+    background-color: black;
+}
