@@ -6,7 +6,8 @@ h2 {
     background-color: #d9dad1;
     border-bottom: 5px solid black;
     font-size: 50px;
-    margin-top: 0;
+    margin: 0;
+    margin-bottom: 20px;
     padding: 5px;
     width: 100%;
 }
@@ -32,10 +33,10 @@ table {
     background-color: #d9dad1;
     border: 15px double black;
     border-spacing: 0;
-    height: 640px;
+    height: 500px;
     margin: 0 auto;
     position: relative;
-    width: 640px;  
+    width: 500px;  
 }
 
 td {
@@ -53,7 +54,7 @@ button {
     border: 2px solid #86bede;
     font-family: "Comic Sans MS";
     font-size: 14px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     outline: none;
     padding: 10px;
 }
@@ -61,7 +62,6 @@ button {
 button:hover {
     border: 2px solid #000;
 }
-
 
 
 /******************************************/
@@ -76,6 +76,9 @@ footer {
     width: 100%;
 }
 
+footer p {
+    margin: 5px 0;
+}
 
 
 /******************************************/
@@ -85,6 +88,7 @@ footer {
 .colored {
     background-color: black;
 }
+
 
 
 
