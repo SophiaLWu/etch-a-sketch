@@ -4,27 +4,32 @@
 
 body {
     text-align: center;
+    background-color: #6a6271;
 }
 
-wrapper {
+.wrapper {
+    position: relative;
 }
 
 table {
+    background-color: #d9dad1;
     position: relative;
     margin: 0 auto;
     border-spacing: 0;
-    border: 1px solid black;
-    table-layout: fixed;
-}
-
-tr {
+    border: 15px double black;
+    width: 640px;
+    height: 640px;
 }
 
 td {
     border: none;
-    width: 20px;
-    height: 20px;
-    display: inline-block;
+}
+
+footer {
+    position: relative;
+    bottom: 0;
+    text-align: center;
+    width: 100%;
 }
 
 
@@ -43,3 +48,4 @@ td {
 .colored {
     background-color: black;
 }
+
