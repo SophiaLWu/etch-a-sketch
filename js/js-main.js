@@ -3,11 +3,12 @@ var style = "default";
 $(document).ready(function() {
     createTable(16);
     toggleStyle(colorDefault);
-    defaultButtonBorder(style)
+    defaultButtonBorder(style);
 
     // Resets the sketch pad when user clicks "Clear Sketch Pad" button
     $("#clear").click(function() {
         $("td").removeAttr("style");
+        $("td").addClass("startGradient");
     });
 
     // Creates a new sketch pad with user-prompted size when user clicks
@@ -19,14 +20,14 @@ $(document).ready(function() {
     // Makes colors rainbow when user clicks "Rainbow Colors" button
     $("#rainbow").click(function() {
         style = "rainbow"
-        defaultButtonBorder(style)
+        defaultButtonBorder(style);
         toggleStyle(rainbowColors);
     });
 
     // Makes colors gradient black when user clicks "Gradient Black" button
     $("#gradient").click(function() {
         style = "gradient"
-        defaultButtonBorder(style)
+        defaultButtonBorder(style);
         $("td").addClass("startGradient");
         toggleStyle(gradientBlack);
     });
@@ -34,7 +35,7 @@ $(document).ready(function() {
     // Makes colors default black when user clicks "Default Black" button
     $("#default").click(function() {
         style = "default"
-        defaultButtonBorder(style)
+        defaultButtonBorder(style);
         toggleStyle(colorDefault);
     });
 
@@ -74,6 +75,8 @@ $(document).ready(function() {
             toggleStyle(rainbowColors);
         }
         else {
+            console.log("blah");
+            $("td").addClass("startGradient");
             toggleStyle(gradientBlack);
         }
     }
@@ -110,14 +113,15 @@ $(document).ready(function() {
     // When user mouses over a box, colors it to a darker shade of black
     // each time (10% increase in opacity each time the same box is hovered
     function gradientBlack() {
+        console.log("here");
         if (!$(this).hasClass("startGradient") && 
             $(this).css("opacity") > 0) {
                 $(this).css("opacity", "+=0.1");
             }
-            if ($(this).hasClass("startGradient")) {
-                $(this).css({"background-color": "black",
-                             "opacity": "0.1"});
-                $(this).removeClass("startGradient");
+        if ($(this).hasClass("startGradient")) {
+            $(this).css({"background-color": "black",
+                         "opacity": "0.1"});
+            $(this).removeClass("startGradient");
             }
     }
 
@@ -125,19 +129,19 @@ $(document).ready(function() {
     // any other buttons
     function defaultButtonBorder(style) {
         if (style === "default") {
-            $("#default").css("border-color", "#DE7777");
-            $("#rainbow").css("border-color", "#86bede");
-            $("#gradient").css("border-color", "#86bede");
+            $("#default").addClass("current-style");
+            $("#rainbow").removeClass("current-style");
+            $("#gradient").removeClass("current-style");
         }
         else if (style === "rainbow") {
-            $("#default").css("border-color", "#86bede");
-            $("#rainbow").css("border-color", "#DE7777");
-            $("#gradient").css("border-color", "#86bede");
+            $("#rainbow").addClass("current-style");
+            $("#gradient").removeClass("current-style");
+            $("#default").removeClass("current-style");
         }
         else {
-            $("#default").css("border-color", "#86bede");
-            $("#rainbow").css("border-color", "#86bede");
-            $("#gradient").css("border-color", "#DE7777");
+            $("#gradient").addClass("current-style");
+            $("#rainbow").removeClass("current-style");
+            $("#default").removeClass("current-style");
         }
     }
 
