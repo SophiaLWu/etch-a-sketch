@@ -1,30 +1,26 @@
 var style = "default";
 
 $(document).ready(function() {
-    createTable(16);
+    createTable(40);
     toggleStyle(colorDefault);
     defaultButtonBorder(style);
 
-    // Resets the sketch pad when user clicks "Clear Sketch Pad" button
+    // Clears the sketch pad when user clicks "Clear Sketch Pad" button
     $("#clear").click(function() {
         $("td").removeAttr("style");
         $("td").addClass("startGradient");
     });
 
-    // Creates a new sketch pad with user-prompted size when user clicks
-    // "New Sketch Pad" button
     $("#new-pad").click(function() {
         newSketch();
     });
 
-    // Makes colors rainbow when user clicks "Rainbow Colors" button
     $("#rainbow").click(function() {
         style = "rainbow"
         defaultButtonBorder(style);
         toggleStyle(rainbowColors);
     });
 
-    // Makes colors gradient black when user clicks "Gradient Black" button
     $("#gradient").click(function() {
         style = "gradient"
         defaultButtonBorder(style);
@@ -32,7 +28,6 @@ $(document).ready(function() {
         toggleStyle(gradientBlack);
     });
 
-    // Makes colors default black when user clicks "Default Black" button
     $("#default").click(function() {
         style = "default"
         defaultButtonBorder(style);
@@ -59,7 +54,7 @@ $(document).ready(function() {
     // Creates a new sketch pad with the user-prompted size and
     // keeps current style
     function newSketch() {
-        var input = prompt("Please enter a valid grid size:");
+        var input = prompt("Please enter a valid number of rows:");
         if (input < 1) {
             var input = prompt("Please enter a positive number!");
         }
