@@ -1,10 +1,9 @@
-var colorType = "default";
+var style = "default";
 
 $(document).ready(function() {
     createTable(16);
-    if (colorType === "default") {
-        colorDefault();
-    }
+    toggleStyle(colorDefault);
+    defaultButtonBorder(style)
 
     // Resets the sketch pad when user clicks "Clear Sketch Pad" button
     $("#clear").click(function() {
@@ -15,96 +14,134 @@ $(document).ready(function() {
     // "New Sketch Pad" button
     $("#new-pad").click(function() {
         newSketch();
-        if (colorType === "default") {
-            colorDefault();
-        }   
-        else if (colorType === "rainbow") {
-            rainbowColors();
-        }
-        else {
-            gradientBlack();
-        }
     });
 
     // Makes colors rainbow when user clicks "Rainbow Colors" button
     $("#rainbow").click(function() {
-        colorType = "rainbow";
-        rainbowColors();
+        style = "rainbow"
+        defaultButtonBorder(style)
+        toggleStyle(rainbowColors);
     });
 
     // Makes colors gradient black when user clicks "Gradient Black" button
     $("#gradient").click(function() {
-        colorType = "gradient";
-        gradientBlack();
+        style = "gradient"
+        defaultButtonBorder(style)
         $("td").addClass("startGradient");
+        toggleStyle(gradientBlack);
     });
 
     // Makes colors default black when user clicks "Default Black" button
     $("#default").click(function() {
-        colorType = "default";
-        colorDefault();
+        style = "default"
+        defaultButtonBorder(style)
+        toggleStyle(colorDefault);
     });
 
-});
 
+    /***************************************************/
+    /************** FUNCTION DEFINITIONS ***************/
+    /***************************************************/
 
-//***************************************************//
-//******************** FUNCTIONS ********************//
-//***************************************************//
-
-// Creates a table with num x num dimensions in the wrapper div
-function createTable(num) {
-    $(".wrapper").append("<table></table>");
-    for (var i = 0; i < num; i++) {
-        $("table").append("<tr ID='row" + i + "' ");
-        for (var j = 0; j < num; j++) {
-            $("#row" + i).append("<td></td>");
+    // Creates a table with num x num dimensions in the wrapper div
+    function createTable(num) {
+        $(".wrapper").append("<table></table>");
+        for (var i = 0; i < num; i++) {
+            $("table").append("<tr ID='row" + i + "' ");
+            for (var j = 0; j < num; j++) {
+                $("#row" + i).append("<td></td>");
+            }
+            $("table").append("</tr>");
         }
-        $("table").append("</tr>");
     }
-}
 
-// When user mouses over a box, colors it the default black color
-function colorDefault() {
-    $("td").mouseover(function() {
-        $(this).css("background-color", "black");
-        //$(this).css("opacity", "1.0");
-    });
-}
-
-// Creates a new sketch pad with the user-prompted size
-function newSketch() {
-    var input = prompt("Please enter a grid size:");
-    if (input === null) {
-        return;
-    }
-    $("td").removeClass("colored");
+    // Creates a new sketch pad with the user-prompted size and
+    // keeps current style
+    function newSketch() {
+        var input = prompt("Please enter a valid grid size:");
+        if (input < 1) {
+            var input = prompt("Please enter a positive number!");
+        }
+        if (input === null) {
+            return;
+        }
         $("table").remove();
         createTable(input);
-}
+        if (style === "default") {
+            toggleStyle(colorDefault);
+        }
+        else if (style === "rainbow") {
+            toggleStyle(rainbowColors);
+        }
+        else {
+            toggleStyle(gradientBlack);
+        }
+    }
 
-// Changes colors of hovering to randomized rainbow
-function rainbowColors() {
-    $("td").mouseover(function() {
+    // Turns off styling and then turns on styling for the currently
+    // clicked style button
+    function toggleStyle(style) {
+        $("td").off("mouseenter");
+        $("td").on("mouseenter", style);
+        if (style === "colorDefault") {
+            style = "default";
+        }
+        else if (style === "rainbowColors") {
+            style = "rainbow";
+        }
+        else {
+            style = "gradient";
+        }
+    }
+
+    // When user mouses over a box, colors it the default black color
+    function colorDefault() {
+        $(this).css({"background-color": "black",
+                     "opacity": "1.0"});
+    }
+
+    // When user mouses over a box, colors it to a random color
+    function rainbowColors() {
         var newColor = "#" + Math.floor(Math.random()*16777215).toString(16);
-        $(this).css("background-color", newColor);
-    });
+        $(this).css({"background-color": newColor,
+                     "opacity": "1.0"});
+    }
 
-};
-
-// Changes colors of hovering to gradient black (darker each time the
-// user hovers over the same box)
-function gradientBlack() {
-    $("td").mouseover(function() {
+    // When user mouses over a box, colors it to a darker shade of black
+    // each time (10% increase in opacity each time the same box is hovered
+    function gradientBlack() {
         if (!$(this).hasClass("startGradient") && 
-        $(this).css("opacity") > 0) {
-            $(this).css("opacity", "+=0.1");
+            $(this).css("opacity") > 0) {
+                $(this).css("opacity", "+=0.1");
+            }
+            if ($(this).hasClass("startGradient")) {
+                $(this).css({"background-color": "black",
+                             "opacity": "0.1"});
+                $(this).removeClass("startGradient");
+            }
+    }
+
+    // Adds red border to current style button and removes border from
+    // any other buttons
+    function defaultButtonBorder(style) {
+        if (style === "default") {
+            $("#default").css("border-color", "#DE7777");
+            $("#rainbow").css("border-color", "#86bede");
+            $("#gradient").css("border-color", "#86bede");
         }
-        if ($(this).hasClass("startGradient")) {
-            $(this).css("background-color", "black");
-            $(this).css("opacity", "0.1");
-            $(this).removeClass("startGradient");
+        else if (style === "rainbow") {
+            $("#default").css("border-color", "#86bede");
+            $("#rainbow").css("border-color", "#DE7777");
+            $("#gradient").css("border-color", "#86bede");
         }
-    });
-}
+        else {
+            $("#default").css("border-color", "#86bede");
+            $("#rainbow").css("border-color", "#86bede");
+            $("#gradient").css("border-color", "#DE7777");
+        }
+    }
+
+}); 
+
+
 
