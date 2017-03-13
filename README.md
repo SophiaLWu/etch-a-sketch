@@ -1,3 +1,7 @@
-This is the javascript/jquery project under Web Development 101 for The Odin Project. The project involves building an etch-a-sketch in order to learn how to use jQuery.
+# Etch-A-Sketch
 
-Visit this link for more information: http://www.theodinproject.com/web-development-101/javascript-and-jquery?ref=lnav
+This is an etch-a-sketch web app built using JavaScript and jQuery.
+[Click here](https://rawgit.com/SophiaLWu/project-javascript-jquery/master/index.html) to play with the web app.
+
+
+This is a project detailed in [The Odin Project](http://www.theodinproject.com/web-development-101/javascript-and-jquery?ref=lnav).
